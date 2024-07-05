@@ -1,0 +1,9 @@
+# Ignore all files
+*
+
+# Except these files
+!Script.js
+!Merge.yaml
+
+# To make sure directories are not ignored
+!.gitignore
