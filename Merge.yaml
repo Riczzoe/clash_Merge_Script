@@ -1,7 +1,253 @@
-# Profile Enhancement Merge Template for Clash Verge
-
-profile:
-  store-selected: true
-
-dns:
-  use-system-hosts: false
+rule-providers:
+  AI:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/AI/AI.yaml
+    path: ./Rules/AI/AI.yaml
+    interval: 86400
+  Apple-domain:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Apple-domain.yaml
+    path: ./Rules/Apple-domain.yaml
+    interval: 86400
+  Apple-ipcidr:
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Apple-ipcidr.yaml
+    path: ./Rules/Apple-ipcidr.yaml
+    type: http
+    interval: 86400
+  Amazon:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Amazon.yaml
+    path: ./Rules/Media/Amazon.yaml
+    type: http
+    interval: 86400
+  Arch-mirrors:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Download/Arch-mirrors.yaml
+    path: ./Rules/Download/Arch-mirrors.yaml
+    type: http
+    interval: 86400
+  China-streaming:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/China-streaming.yaml
+    path: ./Rules/Media/China-streaming.yaml
+    type: http
+    interval: 86400
+  China-streaming-ipcidr:
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/China-streaming-ipcidr.yaml
+    path: ./Rules/Media/China-streaming-ipcidr.yaml
+    type: http
+    interval: 86400
+  Claude-ai:
+    behavior: domain 
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/AI/Claude-ai.yaml
+    path: ./Rules/AI/Claude-ai.yaml
+    type: http
+    interval: 86400
+  Coursera:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Learning/Coursera.yaml
+    path: ./Rules/Learning/Coursera.yaml
+    type: http
+    interval: 86400
+  Disney Plus: 
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Disney%20Plus.yaml
+    path: ./Rules/Media/Disney_Plus.yaml
+    type: http
+    interval: 86400
+  Emby:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Emby.yaml
+    path: ./Rules/Media/Emby.yaml
+    type: http
+    interval: 86400
+  Github:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Daily/Github.yaml
+    path: ./Rules/Daily/Github.yaml
+    type: http
+    interval: 86400
+  Google:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Google.yaml
+    path: ./Rules/Google-domain.yaml
+    type: http
+    interval: 86400
+  Google-ipcidr:
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Google-ipcidr.yaml
+    path: ./Rules/Google-ipcidr.yaml
+    type: http
+    interval: 86400
+  HamiVideo:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/HamiVideo.yaml
+    path: ./Rules/Media/HamiVideo.yaml
+    type: http
+    interval: 86400
+  HBO Max:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/HBO%20Max.yaml
+    path: ./Rules/Media/HBO_Max.yaml
+    type: http
+    interval: 86400
+  JD:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/China/JD.yaml
+    path: ./Rules/China/JD.yaml
+    type: http
+    interval: 86400
+  Microsoft:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Microsoft.yaml
+    path: ./Rules/Microsoft.yaml
+    type: http
+    interval: 86400
+  Netflix:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Netflix.yaml
+    path: ./Rules/Media/Netflix.yaml
+    type: http
+    interval: 86400
+  Netflix-ipcidr:
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Netflix-ipcidr.yaml
+    path: ./Rules/Media/Netflix-ipcidr.yaml
+    type: http
+    interval: 86400
+  OpenAI:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/AI/OpenAI.yaml
+    path: ./Rules/AI/OpenAI.yaml
+    type: http
+    interval: 86400
+  PayPal:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/PayPal.yaml
+    path: ./Rules/PayPal.yaml
+    type: http
+    interval: 86400
+  Scholar:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Learning/Scholar.yaml
+    path: ./Rules/Learning/Scholar.yaml
+    type: http
+    interval: 86400
+  Speedtest:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Speedtest.yaml
+    path: ./Rules/Speedtest.yaml
+    type: http
+    interval: 86400
+  Spotify:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Spotify.yaml
+    path: ./Rules/Media/Spotify.yaml
+    type: http
+    interval: 86400
+  StarPlus:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/StarPlus.yaml
+    path: ./Rules/Media/StarPlus.yaml
+    type: http
+    interval: 86400
+  StarPlusLogin:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/StarPlusLogin.yaml
+    path: ./Rules/Media/StarPlusLogin.yaml
+    type: http
+    interval: 86400
+  Steam:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Steam.yaml
+    path: ./Rules/Steam.yaml
+    type: http
+    interval: 86400
+  Steam-download:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Download/Steam-download.yaml
+    path: ./Rules/Download/Steam-download.yaml
+    type: http
+    interval: 86400
+  Packages:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Download/packages.yaml
+    path: ./Rules/Download/Packages.yaml
+    type: http
+    interval: 86400
+  Tech:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Daily/Tech.yaml
+    path: ./Rules/Daily/Tech.yaml
+    type: http
+    interval: 86400
+  Telegram-ipcidr:
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Telegram-ipcidr.yaml
+    path: ./Rules/Telegram-ipcidr.yaml
+    type: http
+    interval: 86400
+  Telegram:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Telegram.yaml
+    path: ./Rules/Telegram.yaml
+    type: http
+    interval: 86400
+  Tiktok:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Tiktok.yaml
+    path: ./Rules/Media/Tiktok.yaml
+    type: http
+    interval: 86400
+  Twitter:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Twitter.yaml
+    path: ./Rules/Media/Twitter.yaml
+    type: http
+    interval: 86400
+  YouTube:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/YouTube.yaml
+    path: ./Rules/Media/YouTube.yaml
+    type: http
+    interval: 86400
+  YouTube Music:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/YouTube%20Music.yaml
+    path: ./Rules/Media/YouTube_Music.yaml
+    type: http
+    interval: 86400
+  Domestic:
+    behavior: domain
+    url: https://github.com/Riczzoe/Clash-Rule-Set/raw/main/Provider/Domestic.yaml
+    path: ./Rules/Domestic.yaml
+    type: http
+    interval: 86400
+  Domestic-ipcidr:
+    behavior: ipcidr
+    url: https://github.com/Riczzoe/Clash-Rule-Set/raw/main/Provider/Domestic-ipcidr.yaml
+    path: ./Rules/Domestic-ipcidr.yaml
+    type: http
+    interval: 86400
+  LAN:
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/LAN.yaml
+    path: ./Rules/LAN.yaml
+    type: http
+    interval: 86400
+  China-Websites:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/China/China-Websites.yaml
+    path: ./Rules/China/China-Websites.yaml
+    type: http
+    interval: 86400
+  reject:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
+    path: ./Rules/Reject.yaml
+    type: http
+    interval: 86400
