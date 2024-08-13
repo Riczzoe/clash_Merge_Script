@@ -29,6 +29,18 @@ rule-providers:
     path: ./Rules/Download/Arch-mirrors.yaml
     type: http
     interval: 86400
+  Bilibili:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Bilibili.yaml
+    path: ./Rules/Media/Bilibili.yaml
+    type: http
+    interval: 86400
+  Bilibili-ipcidr:
+    behavior: ipcidr
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Bilibili-ipcidr.yaml
+    path: ./Rules/Media/Bilibili-ipcidr.yaml
+    type: http
+    interval: 86400
   China-streaming:
     behavior: domain
     url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/China-streaming.yaml
