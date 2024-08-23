@@ -59,6 +59,55 @@ const customGroups = [
   }
 ]
 
+function updateDNS(config) {
+  const domesticNameservers = [
+    "https://dns.alidns.com/dns-query", 
+    "https://doh.pub/dns-query", 
+    "https://doh.360.cn/dns-query"
+  ];
+  // 国外DNS服务器
+  const foreignNameservers = [
+    "https://1.1.1.1/dns-query", 
+    "https://1.0.0.1/dns-query", 
+    "https://208.67.222.222/dns-query",
+    "https://208.67.220.220/dns-query",
+    "https://194.242.2.2/dns-query", 
+    "https://194.242.2.3/dns-query"
+  ];
+  // DNS配置
+  const dnsConfig = {
+    "enable": true,
+    "listen": "0.0.0.0:1053",
+    "ipv6": true,
+    "use-system-hosts": false,
+    "cache-algorithm": "arc",
+    "enhanced-mode": "fake-ip",
+    "fake-ip-range": "198.18.0.1/16",
+    "fake-ip-filter": [
+      // 本地主机/设备
+      "+.lan",
+      "+.local",
+      // Windows网络出现小地球图标
+      "+.msftconnecttest.com",
+      "+.msftncsi.com",
+      // QQ快速登录检测失败
+      "localhost.ptlogin2.qq.com",
+      "localhost.sec.qq.com",
+      // 微信快速登录检测失败
+      "localhost.work.weixin.qq.com"
+    ],
+    "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
+    "nameserver": [...domesticNameservers, ...foreignNameservers],
+    "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
+    "nameserver-policy": {
+      "geosite:private,cn,geolocation-cn": domesticNameservers,
+      "geosite:google,youtube,telegram,gfw,geolocation-!cn": foreignNameservers
+    }
+  };
+
+  config["dns"] = dnsConfig;
+}
+
 function delOriginRuleAndProxys(config) {
   // 删除原始的proxy-groups和rules
   config['proxy-groups'] = [];
@@ -240,7 +289,7 @@ function addRegionGroupsToCustomGroups(config) {
 const rules = [
   // "IP-CIDR,34.92.28.5/32,DIRECT",
   "DOMAIN-SUFFIX,kagi.com,GAM",
-  "DOMAIN-SUFFIX,github.dev,DIRECT",
+  // "DOMAIN-SUFFIX,github.dev,DIRECT",
   "DOMAIN-SUFFIX,wqatom.lol,DIRECT",
   "IP-CIDR,127.0.0.1/8,DIRECT",
   "DOMAIN-KEYWORD,shanbay,DIRECT",
@@ -295,7 +344,7 @@ const rules = [
   "RULE-SET,Tiktok,Amusement",
   "RULE-SET,YouTube Music,Amusement",
   "RULE-SET,Domestic,DIRECT",
-  "RULE-SET,Domestic-ipcidr,DIRECT",
+  // "RULE-SET,Domestic-ipcidr,DIRECT",
   "RULE-SET,LAN,DIRECT",
   "RULE-SET,China-Websites,DIRECT",
   "RULE-SET,reject,Reject",
@@ -309,5 +358,6 @@ function main(config) {
   addProxyToGroup(config);
   addRegionGroupsToCustomGroups(config);
   config["rules"] = [...rules];
+  updateDNS(config);
   return config;
 }

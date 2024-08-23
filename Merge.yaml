@@ -239,12 +239,12 @@ rule-providers:
     path: ./Rules/Domestic.yaml
     type: http
     interval: 86400
-  Domestic-ipcidr:
-    behavior: ipcidr
-    url: https://github.com/Riczzoe/Clash-Rule-Set/raw/main/Provider/Domestic-ipcidr.yaml
-    path: ./Rules/Domestic-ipcidr.yaml
-    type: http
-    interval: 86400
+  # Domestic-ipcidr:
+  #   behavior: ipcidr
+  #   url: https://github.com/Riczzoe/Clash-Rule-Set/raw/main/Provider/Domestic-ipcidr.yaml
+  #   path: ./Rules/Domestic-ipcidr.yaml
+  #   type: http
+  #   interval: 86400
   LAN:
     behavior: ipcidr
     url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/LAN.yaml
