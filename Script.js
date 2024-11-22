@@ -39,7 +39,7 @@ const customGroups = [
   },
   {
     "name": "Asia",
-    "pattern": "/^(.*)(马来西亚|马尔代夫|柬埔寨|泰国|TG|缅甸|老挝|越南|不丹|文莱|朝鲜|菲律宾|印尼|Indonsia|印度|India|蒙古|约旦|伊朗|巴林|阿曼|以色列|土耳其|TR|尼泊尔|东帝汶|孟加拉|黎巴嫩|伊拉克|叙利亚|阿富汗|卡塔尔|阿联酋|阿塞拜疆|亚美尼亚|格鲁吉亚|巴基斯坦|斯里兰卡|沙特阿拉伯|哈萨克斯坦|吉尔吉斯斯坦|乌兹别克斯坦)+(.*)/"
+    "pattern": "/^(.*)(马来西亚|马尔代夫|柬埔寨|泰国|TG|缅甸|老挝|越南|不丹|文莱|朝鲜|菲律宾|印尼|Indonesia|印度|India|蒙古|约旦|伊朗|巴林|阿曼|以色列|土耳其|TR|尼泊尔|东帝汶|孟加拉|黎巴嫩|伊拉克|叙利亚|阿富汗|卡塔尔|阿联酋|阿塞拜疆|亚美尼亚|格鲁吉亚|巴基斯坦|斯里兰卡|沙特阿拉伯|哈萨克斯坦|吉尔吉斯斯坦|乌兹别克斯坦|United Arab Emirates)+(.*)/"
   },
   {
     "name": "Oceania",
@@ -65,7 +65,6 @@ function updateDNS(config) {
     "https://doh.pub/dns-query", 
     "https://doh.360.cn/dns-query"
   ];
-  // 国外DNS服务器
   const foreignNameservers = [
     "https://1.1.1.1/dns-query", 
     "https://1.0.0.1/dns-query", 
@@ -74,11 +73,58 @@ function updateDNS(config) {
     "https://194.242.2.2/dns-query", 
     "https://194.242.2.3/dns-query"
   ];
+
+  const dnsConfig = {
+      "enable": true,
+      "prefer-h3": true,
+      "listen": "0.0.0.0:1053",
+      "ipv6": false,
+      "use-system-hosts": false,
+      "cache-algorithm": "arc",
+      "enhanced-mode": "fake-ip",
+      "fake-ip-range": "198.18.0.1/16",
+      "fake-ip-filter": [
+          "+.lan",
+          "+.local",
+          "+.msftconnecttest.com",
+          "+.msftncsi.com",
+          "localhost.ptlogin2.qq.com",
+          "localhost.sec.qq.com",
+          "localhost.work.weixin.qq.com"
+      ],
+      "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
+      "nameserver": [...domesticNameservers, ...foreignNameservers],
+      "fallback": [
+          "tls://8.8.4.4",
+          "tls://1.1.1.1"
+       ],
+      "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers]
+  };
+
+  config["dns"] = dnsConfig;
+}
+
+function updateDNSCloudflareOnly(config) {
+  // 国内DNS服务器
+  const domesticNameservers = [
+    "https://dns.alidns.com/dns-query", // 阿里云公共DNS
+    "https://doh.pub/dns-query", // 腾讯DNSPod
+    "https://doh.360.cn/dns-query" // 360安全DNS
+  ];
+  // 国外DNS服务器
+  const foreignNameservers = [
+    "https://1.1.1.1/dns-query", // Cloudflare(主)
+    "https://1.0.0.1/dns-query", // Cloudflare(备)
+    "https://208.67.222.222/dns-query", // OpenDNS(主)
+    "https://208.67.220.220/dns-query", // OpenDNS(备)
+    "https://194.242.2.2/dns-query", // Mullvad(主)
+    "https://194.242.2.3/dns-query" // Mullvad(备)
+  ];
   // DNS配置
   const dnsConfig = {
     "enable": true,
     "listen": "0.0.0.0:1053",
-    "ipv6": true,
+    "ipv6": false,
     "use-system-hosts": false,
     "cache-algorithm": "arc",
     "enhanced-mode": "fake-ip",
@@ -354,10 +400,13 @@ const rules = [
 
 
 function main(config) {
+
   delOriginRuleAndProxys(config);
   addProxyToGroup(config);
   addRegionGroupsToCustomGroups(config);
   config["rules"] = [...rules];
-  updateDNS(config);
+  // updateDNS(config);
+  updateDNSCloudflareOnly(config);
+  config['unified-delay'] = true;
   return config;
 }
