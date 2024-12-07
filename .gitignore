@@ -4,6 +4,7 @@
 # Except these files
 !Script.js
 !Merge.yaml
+!addProxyProvider.js
 
 # To make sure directories are not ignored
 !.gitignore
