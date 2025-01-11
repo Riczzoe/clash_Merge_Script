@@ -4,6 +4,7 @@ const groupNames = [
   "China",
   "Download",
   "GAM",
+  "Netflix",
   "Scholar",
   "Tech"
 ]
@@ -208,7 +209,7 @@ function delOriginRuleAndProxys(config) {
   return config;
 }
 
-function assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, HamiVideo, StarPlusLogin, StarPlus }) {
+function assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, HamiVideo, Netflix, StarPlusLogin, StarPlus }) {
   const MustProxyGroup = ["Amusement", "GAM"];
   const DirectFirstGroup = ["China", ];
   const ProxyFirstGroup = ["Download", "GAM", "Scholar", "Tech"];
@@ -231,6 +232,8 @@ function assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, b
       group.proxies = AI;
     } else if (group.name === "HamiVideo") {
       group.proxies = HamiVideo;
+    } else if (group.name === "Netflix") {
+      group.proxies = Netflix;
     } else if (group.name === "StarPlusLogin") {
       group.proxies = StarPlusLogin;
     } else if (group.name === "StarPlus") {
@@ -325,10 +328,11 @@ function addRegionGroupsToCustomGroups(config) {
   const ProxyFirst = ["PROXY", "DIRECT", ...baseProxy];
   const AI = constructGroup(["US", "UK"], MustProxy);
   const HamiVideo = constructGroup(["TW"], MustProxy);
+  const Netflix = constructGroup(["SG"], MustProxy);
   const StarPlusLogin = constructGroup(["America"], MustProxy);
   const StarPlus = constructGroup(["US"], MustProxy);
 
-  const updatedRawObj = assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, HamiVideo, StarPlusLogin, StarPlus });
+  const updatedRawObj = assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, HamiVideo, Netflix, StarPlusLogin, StarPlus });
   return updatedRawObj;
 }
 
