@@ -215,6 +215,11 @@ rule-providers:
     path: ./Rules/Media/Tiktok.yaml
     type: http
     interval: 86400
+  Tiktok-c:
+    behavior: classical
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/Media/Tiktok-c.yaml
+    type: http
+    interval: 86400
   Twitter:
     behavior: domain
     url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Twitter.yaml

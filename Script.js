@@ -77,11 +77,9 @@ function updateDNS(config) {
 
   const dnsConfig = {
       "enable": true,
-      "prefer-h3": true,
+      "ipv6": false,    
       "listen": "0.0.0.0:1053",
-      "ipv6": false,
-      "use-system-hosts": false,
-      "cache-algorithm": "arc",
+      "use-hosts": true,
       "enhanced-mode": "fake-ip",
       "fake-ip-range": "198.18.0.1/16",
       "fake-ip-filter": [
@@ -93,63 +91,67 @@ function updateDNS(config) {
           "localhost.sec.qq.com",
           "localhost.work.weixin.qq.com"
       ],
-      "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
+      "default-nameserver": ["180.184.1.1", "223.5.5.5", "119.29.29.29", "8.8.8.8"],
+      "nameserver-policy": {
+            '+.pphimalayanrt.com': '223.5.5.5',
+            'st.dl.eccdnx.com': '223.5.5.5',
+            '+.tmall.com': '223.5.5.5',
+            '+.taobao.com': '223.5.5.5',
+            '+.alicdn.com': '223.5.5.5',
+            '+.aliyun.com': '223.5.5.5',
+            '+.alipay.com': '223.5.5.5',
+            '+.alibaba.com': '223.5.5.5',
+            '+.qq.com': '119.29.29.29',
+            '+.tencent.com': '119.29.29.29',
+            '+.weixin.com': '119.29.29.29',
+            '+.qpic.cn': '119.29.29.29',
+            '+.jd.com': '119.29.29.29',
+            '+.bilibili.com': '119.29.29.29',
+            '+.hdslb.com': '119.29.29.29',
+            '+.163.com': '119.29.29.29',
+            '+.126.com': '119.29.29.29',
+            '+.126.net': '119.29.29.29',
+            '+.127.net': '119.29.29.29',
+            '+.netease.com': '119.29.29.29',
+            '+.baidu.com': '223.5.5.5',
+            '+.bdstatic.com': '223.5.5.5',
+            '+.bilivideo.+': '119.29.29.29',
+            '+.iqiyi.com': '119.29.29.29',
+            '+.douyinvod.com': '180.184.1.1',
+            '+.douyin.com': '180.184.1.1',
+            '+.douyincdn.com': '180.184.1.1',
+            '+.douyinpic.com': '180.184.1.1',
+            '+.feishu.cn': '180.184.1.1'
+      },
       "nameserver": [...domesticNameservers, ...foreignNameservers],
-      "fallback": [
-          "tls://8.8.4.4",
-          "tls://1.1.1.1"
-       ],
-      "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers]
-  };
-
-  config["dns"] = dnsConfig;
-}
-
-function updateDNSCloudflareOnly(config) {
-  // 国内DNS服务器
-  const domesticNameservers = [
-    "https://dns.alidns.com/dns-query", // 阿里云公共DNS
-    "https://doh.pub/dns-query", // 腾讯DNSPod
-    "https://doh.360.cn/dns-query" // 360安全DNS
-  ];
-  // 国外DNS服务器
-  const foreignNameservers = [
-    "https://1.1.1.1/dns-query", // Cloudflare(主)
-    "https://1.0.0.1/dns-query", // Cloudflare(备)
-    "https://208.67.222.222/dns-query", // OpenDNS(主)
-    "https://208.67.220.220/dns-query", // OpenDNS(备)
-    "https://194.242.2.2/dns-query", // Mullvad(主)
-    "https://194.242.2.3/dns-query" // Mullvad(备)
-  ];
-  // DNS配置
-  const dnsConfig = {
-    "enable": true,
-    "listen": "0.0.0.0:1053",
-    "ipv6": false,
-    "use-system-hosts": false,
-    "cache-algorithm": "arc",
-    "enhanced-mode": "fake-ip",
-    "fake-ip-range": "198.18.0.1/16",
-    "fake-ip-filter": [
-      // 本地主机/设备
-      "+.lan",
-      "+.local",
-      // Windows网络出现小地球图标
-      "+.msftconnecttest.com",
-      "+.msftncsi.com",
-      // QQ快速登录检测失败
-      "localhost.ptlogin2.qq.com",
-      "localhost.sec.qq.com",
-      // 微信快速登录检测失败
-      "localhost.work.weixin.qq.com"
-    ],
-    "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
-    "nameserver": [...domesticNameservers, ...foreignNameservers],
-    "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
-    "nameserver-policy": {
-      "geosite:private,cn,geolocation-cn": domesticNameservers,
-      "geosite:google,youtube,telegram,gfw,geolocation-!cn": foreignNameservers
-    }
+      "fallback":  [
+          'https://101.101.101.101/dns-query', 
+          'https://208.67.220.220/dns-query', 
+          'https://doh.mullvad.net/dns-query'
+      ],
+      "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
+      "fallback-filter": { 
+          geoip: true, 
+          ipcidr: [
+              '240.0.0.0/4',
+              '0.0.0.0/32',
+              '223.75.236.241/32',
+              '182.43.124.6/32',
+              '106.74.25.198/32',
+              '183.192.65.101/32'
+          ], 
+          domain: [
+              '+.google.cn',
+              '+.tagss01.pro',
+              '+.tagss02.pro',
+              '+.tagss03.pro',
+              '+.tagss04.pro',
+              '+.tagss05.pro',
+              '+.tagcdnsub.work',
+              '+.jsdelivr.net',
+              '+.proton.me'
+          ]
+      }
   };
 
   config["dns"] = dnsConfig;
@@ -372,8 +374,6 @@ const rules = [
   "RULE-SET,Amazon,GAM",
   "RULE-SET,Bilibili,China",
   "RULE-SET,Bilibili-ipcidr,China",
-  "RULE-SET,China-streaming,China",
-  "RULE-SET,China-streaming-ipcidr,China",
   "RULE-SET,Claude-ai,AI",
   "RULE-SET,Coursera,Scholar",
   "RULE-SET,Disney Plus,Amusement",
@@ -392,11 +392,14 @@ const rules = [
   "RULE-SET,Steam,Amusement",
   "RULE-SET,Steam-download,Download",
   "RULE-SET,Tiktok,Amusement",
+  "RULE-SET,Tiktok-c,Amusement",
   "RULE-SET,YouTube Music,Amusement",
   "RULE-SET,Domestic,DIRECT",
   // "RULE-SET,Domestic-ipcidr,DIRECT",
   "RULE-SET,LAN,DIRECT",
   "RULE-SET,China-Websites,DIRECT",
+  "RULE-SET,China-streaming,China",
+  "RULE-SET,China-streaming-ipcidr,China",
   "RULE-SET,reject,Reject",
   "GEOIP,CN,DIRECT",
   "MATCH,Final"
@@ -409,8 +412,6 @@ function main(config) {
   addProxyToGroup(config);
   addRegionGroupsToCustomGroups(config);
   config["rules"] = [...rules];
-  // updateDNS(config);
-  updateDNSCloudflareOnly(config);
-  // config['unified-delay'] = true;
+  updateDNS(config);
   return config;
 }
