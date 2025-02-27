@@ -10,37 +10,29 @@ const groupNames = [
 ]
 
 const customGroups = [
+  // {
+  //   "name": "HK",
+  //   "pattern": "/^(.*)(香港|Hong Kong|HK|澳门)+(.*)$/"
+  // },
+  // {
+  //   "name": "TW",
+  //   "pattern": "/^(.*)(台湾|TW|TaiWan|Taiwan)+(.*)$/"
+  // },
   {
-    "name": "HK",
-    "pattern": "/^(.*)(香港|Hong Kong|HK|澳门)+(.*)$/"
-  },
-  {
-    "name": "TW",
-    "pattern": "/^(.*)(台湾|TW|TaiWan|Taiwan)+(.*)$/"
+    "name": "HT",
+    "pattern": "/^(.*)(香港|Hong Kong|HK|澳门|台湾|TW|TaiWan|Taiwan)+(.*)$/"
   },
   {
     "name": "SG",
     "pattern": "/^(.*)(新加坡|SG|Singapore|狮城)+(.*)$/"
   },
   {
-    "name": "KR",
-    "pattern": "/^(.*)(韩国|KR|Korea)+(.*)$/"
-  },
-  {
-    "name": "JP",
-    "pattern": "/^(.*)(日本|JP|Japan)+(.*)$/"
-  },
-  {
     "name": "US",
     "pattern": "/^(.*)(美国|US|USA)+(.*)$/"
   },
   {
-    "name": "UK",
-    "pattern": "/^(.*)(英国|UK)+(.*)$/"
-  },
-  {
     "name": "Asia",
-    "pattern": "/^(.*)(马来西亚|马尔代夫|柬埔寨|泰国|TG|缅甸|老挝|越南|不丹|文莱|朝鲜|菲律宾|印尼|Indonesia|印度|India|蒙古|约旦|伊朗|巴林|阿曼|以色列|土耳其|TR|尼泊尔|东帝汶|孟加拉|黎巴嫩|伊拉克|叙利亚|阿富汗|卡塔尔|阿联酋|阿塞拜疆|亚美尼亚|格鲁吉亚|巴基斯坦|斯里兰卡|沙特阿拉伯|哈萨克斯坦|吉尔吉斯斯坦|乌兹别克斯坦|United Arab Emirates|科威特)+(.*)/"
+    "pattern": "/^(.*)(日本|JP|Japan|韩国|KR|Korea|马来西亚|马尔代夫|柬埔寨|泰国|TG|缅甸|老挝|越南|不丹|文莱|朝鲜|菲律宾|印尼|Indonesia|印度|India|蒙古|约旦|伊朗|巴林|阿曼|以色列|土耳其|TR|尼泊尔|东帝汶|孟加拉|黎巴嫩|伊拉克|叙利亚|阿富汗|卡塔尔|阿联酋|阿塞拜疆|亚美尼亚|格鲁吉亚|巴基斯坦|斯里兰卡|沙特阿拉伯|哈萨克斯坦|吉尔吉斯斯坦|乌兹别克斯坦|United Arab Emirates|科威特)+(.*)/"
   },
   {
     "name": "Oceania",
@@ -52,7 +44,7 @@ const customGroups = [
   },
   {
     "name": "Europe",
-    "pattern": "/^(.*)(Netherlands|荷兰|Russia|俄罗斯|Germany|德国|DE|France|法国|Switzerland|瑞士|Sweden|瑞典|Bulgaria|保加利亚|Austria|奥地利|Ireland|爱尔兰|Turkey|Hungary|法国|英国|马恩岛|德国|丹麦|挪威|瑞典|芬兰|冰岛|瑞士|捷克|希腊|荷兰|波兰|黑山|俄罗斯|乌克兰|匈牙利|卢森堡|奥地利|意大利|梵蒂冈|比利时|爱尔兰|立陶宛|西班牙|葡萄牙|安道尔|马耳他|摩纳哥|保加利亚|克罗地亚|北马其顿|塞尔维亚|塞浦路斯|拉脱维亚|摩尔多瓦|斯洛伐克|爱沙尼亚|白俄罗斯|罗马尼亚|直布罗陀|圣马力诺|法罗群岛|奥兰群岛|斯洛文尼亚|阿尔巴尼亚|波黑共和国|列支敦士登)+(.*)/"
+    "pattern": "/^(.*)(英国|UK|Netherlands|荷兰|Russia|俄罗斯|Germany|德国|DE|France|法国|Switzerland|瑞士|Sweden|瑞典|Bulgaria|保加利亚|Austria|奥地利|Ireland|爱尔兰|Turkey|Hungary|法国|英国|马恩岛|德国|丹麦|挪威|瑞典|芬兰|冰岛|瑞士|捷克|希腊|荷兰|波兰|黑山|俄罗斯|乌克兰|匈牙利|卢森堡|奥地利|意大利|梵蒂冈|比利时|爱尔兰|立陶宛|西班牙|葡萄牙|安道尔|马耳他|摩纳哥|保加利亚|克罗地亚|北马其顿|塞尔维亚|塞浦路斯|拉脱维亚|摩尔多瓦|斯洛伐克|爱沙尼亚|白俄罗斯|罗马尼亚|直布罗陀|圣马力诺|法罗群岛|奥兰群岛|斯洛文尼亚|阿尔巴尼亚|波黑共和国|列支敦士登)+(.*)/"
   },
   {
       "name": "Africa",
@@ -91,7 +83,7 @@ function updateDNS(config) {
           "localhost.sec.qq.com",
           "localhost.work.weixin.qq.com"
       ],
-      "default-nameserver": ["180.184.1.1", "223.5.5.5", "119.29.29.29", "8.8.8.8"],
+      "default-nameserver": ["180.184.1.1", "223.5.5.5", "180.76.76.76", "8.8.8.8"],
       "nameserver-policy": {
             '+.pphimalayanrt.com': '223.5.5.5',
             'st.dl.eccdnx.com': '223.5.5.5',
@@ -101,22 +93,22 @@ function updateDNS(config) {
             '+.aliyun.com': '223.5.5.5',
             '+.alipay.com': '223.5.5.5',
             '+.alibaba.com': '223.5.5.5',
-            '+.qq.com': '119.29.29.29',
-            '+.tencent.com': '119.29.29.29',
-            '+.weixin.com': '119.29.29.29',
-            '+.qpic.cn': '119.29.29.29',
-            '+.jd.com': '119.29.29.29',
-            '+.bilibili.com': '119.29.29.29',
-            '+.hdslb.com': '119.29.29.29',
-            '+.163.com': '119.29.29.29',
-            '+.126.com': '119.29.29.29',
-            '+.126.net': '119.29.29.29',
-            '+.127.net': '119.29.29.29',
-            '+.netease.com': '119.29.29.29',
+            '+.qq.com': '180.76.76.76',
+            '+.tencent.com': '180.76.76.76',
+            '+.weixin.com': '180.76.76.76',
+            '+.qpic.cn': '180.76.76.76',
+            '+.jd.com': '180.76.76.76',
+            '+.bilibili.com': '180.76.76.76',
+            '+.hdslb.com': '180.76.76.76',
+            '+.163.com': '180.76.76.76',
+            '+.126.com': '180.76.76.76',
+            '+.126.net': '180.76.76.76',
+            '+.127.net': '180.76.76.76',
+            '+.netease.com': '180.76.76.76',
             '+.baidu.com': '223.5.5.5',
             '+.bdstatic.com': '223.5.5.5',
-            '+.bilivideo.+': '119.29.29.29',
-            '+.iqiyi.com': '119.29.29.29',
+            '+.bilivideo.+': '180.76.76.76',
+            '+.iqiyi.com': '180.76.76.76',
             '+.douyinvod.com': '180.184.1.1',
             '+.douyin.com': '180.184.1.1',
             '+.douyincdn.com': '180.184.1.1',
@@ -211,7 +203,7 @@ function delOriginRuleAndProxys(config) {
   return config;
 }
 
-function assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, HamiVideo, Netflix, StarPlusLogin, StarPlus }) {
+function assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, Netflix, StarPlusLogin, StarPlus }) {
   const MustProxyGroup = ["Amusement", "GAM"];
   const DirectFirstGroup = ["China", ];
   const ProxyFirstGroup = ["Download", "GAM", "Scholar", "Tech"];
@@ -232,8 +224,6 @@ function assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, b
       group.proxies = baseProxy;
     } else if (group.name === "AI") {
       group.proxies = AI;
-    } else if (group.name === "HamiVideo") {
-      group.proxies = HamiVideo;
     } else if (group.name === "Netflix") {
       group.proxies = Netflix;
     } else if (group.name === "StarPlusLogin") {
@@ -328,13 +318,13 @@ function addRegionGroupsToCustomGroups(config) {
   const MustProxy = ["PROXY", ...baseProxy];
   const DirectFirst = ["DIRECT", ...MustProxy];
   const ProxyFirst = ["PROXY", "DIRECT", ...baseProxy];
-  const AI = constructGroup(["US", "UK"], MustProxy);
-  const HamiVideo = constructGroup(["TW"], MustProxy);
+  const AI = constructGroup(["US"], MustProxy);
+  // const HamiVideo = constructGroup(["TW"], MustProxy);
   const Netflix = constructGroup(["SG"], MustProxy);
   const StarPlusLogin = constructGroup(["America"], MustProxy);
   const StarPlus = constructGroup(["US"], MustProxy);
 
-  const updatedRawObj = assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, HamiVideo, Netflix, StarPlusLogin, StarPlus });
+  const updatedRawObj = assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, Netflix, StarPlusLogin, StarPlus });
   return updatedRawObj;
 }
 
