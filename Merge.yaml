@@ -77,6 +77,17 @@ rule-providers:
     path: ./Rules/Media/Emby.yaml
     type: http
     interval: 86400
+  Gemini:
+    behavior: domain
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/AI/Gemini.yaml
+    path: ./Rules/AI/Gemini.yaml
+    type: http
+    interval: 86400
+  Gemini-c:
+    behavior: classical
+    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/AI/Gemini-c.yaml
+    type: http
+    interval: 86400
   Github:
     behavior: domain
     url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Daily/Github.yaml

@@ -350,6 +350,8 @@ const rules = [
   "RULE-SET,OpenAI,AI",
   "RULE-SET,Arch-mirrors,DIRECT",
   "RULE-SET,Tech,Tech",
+  "RULE-SET,Gemini,AI",
+  "RULE-SET,Gemini-c,AI",
   "RULE-SET,Github,Tech",
   "RULE-SET,Google,GAM",
   "RULE-SET,Google-ipcidr,GAM",
