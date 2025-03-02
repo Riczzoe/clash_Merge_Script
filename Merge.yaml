@@ -41,6 +41,20 @@ rule-providers:
     path: ./Rules/Media/Bilibili-ipcidr.yaml
     type: http
     interval: 86400
+  China:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./Rules/cn.mrs
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cn.mrs"
+    interval: 86400
+  China-ipcidr:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    path: ./Rules/cnip.mrs
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/cnip.mrs"
+    interval: 86400
   China-streaming:
     behavior: domain
     url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/China-streaming.yaml
@@ -76,6 +90,13 @@ rule-providers:
     url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Emby.yaml
     path: ./Rules/Media/Emby.yaml
     type: http
+    interval: 86400
+  Fakeip-filter:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./Rules/fakeip-filter.mrs
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter-lite.mrs"
     interval: 86400
   Gemini:
     behavior: domain
@@ -153,6 +174,13 @@ rule-providers:
     url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/PayPal.yaml
     path: ./Rules/PayPal.yaml
     type: http
+    interval: 86400
+  Private:
+    type: http
+    behavior: domain
+    format: mrs
+    path: ./Rules/private.mrs
+    url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/private.mrs"
     interval: 86400
   Scholar:
     behavior: domain
@@ -249,28 +277,10 @@ rule-providers:
     path: ./Rules/Media/YouTube_Music.yaml
     type: http
     interval: 86400
-  Domestic:
-    behavior: domain
-    url: https://github.com/Riczzoe/Clash-Rule-Set/raw/main/Provider/Domestic.yaml
-    path: ./Rules/Domestic.yaml
-    type: http
-    interval: 86400
-  # Domestic-ipcidr:
-  #   behavior: ipcidr
-  #   url: https://github.com/Riczzoe/Clash-Rule-Set/raw/main/Provider/Domestic-ipcidr.yaml
-  #   path: ./Rules/Domestic-ipcidr.yaml
-  #   type: http
-  #   interval: 86400
   LAN:
     behavior: ipcidr
     url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/LAN.yaml
     path: ./Rules/LAN.yaml
-    type: http
-    interval: 86400
-  China-Websites:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/China/China-Websites.yaml
-    path: ./Rules/China/China-Websites.yaml
     type: http
     interval: 86400
   reject:

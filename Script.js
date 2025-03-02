@@ -1,3 +1,12 @@
+function main(config) {
+  delOriginRuleAndProxys(config);
+  addProxyToGroup(config);
+  addRegionGroupsToCustomGroups(config);
+  config["rules"] = [...rules];
+  updateDNS(config);
+  return config;
+}
+
 const groupNames = [
   "AI",
   "Amusement",
@@ -53,99 +62,36 @@ const customGroups = [
 ]
 
 function updateDNS(config) {
-  const domesticNameservers = [
-    "https://dns.alidns.com/dns-query", 
-    "https://doh.pub/dns-query", 
-    "https://doh.360.cn/dns-query"
-  ];
-  const foreignNameservers = [
-    "https://1.1.1.1/dns-query", 
-    "https://1.0.0.1/dns-query", 
-    "https://208.67.222.222/dns-query",
-    "https://208.67.220.220/dns-query",
-    "https://194.242.2.2/dns-query", 
-    "https://194.242.2.3/dns-query"
-  ];
-
+  const hostConfig = {
+      "doh.pub": ["1.12.12.12", "120.53.53.53"],
+      "dns.alidns.com": ["223.5.5.5", "223.6.6.6"]
+  };
+    
   const dnsConfig = {
       "enable": true,
-      "ipv6": false,    
-      "listen": "0.0.0.0:1053",
+      "ipv6": false,
+      "listen": "0.0.0.0:53",
       "use-hosts": true,
       "enhanced-mode": "fake-ip",
       "fake-ip-range": "198.18.0.1/16",
       "fake-ip-filter": [
-          "+.lan",
-          "+.local",
-          "+.msftconnecttest.com",
-          "+.msftncsi.com",
-          "localhost.ptlogin2.qq.com",
-          "localhost.sec.qq.com",
-          "localhost.work.weixin.qq.com"
+          "rule-set:Fakeip-filter",
+          "rule-set:Private",
+          "rule-set:China"
       ],
-      "default-nameserver": ["180.184.1.1", "223.5.5.5", "180.76.76.76", "8.8.8.8"],
-      "nameserver-policy": {
-            '+.pphimalayanrt.com': '223.5.5.5',
-            'st.dl.eccdnx.com': '223.5.5.5',
-            '+.tmall.com': '223.5.5.5',
-            '+.taobao.com': '223.5.5.5',
-            '+.alicdn.com': '223.5.5.5',
-            '+.aliyun.com': '223.5.5.5',
-            '+.alipay.com': '223.5.5.5',
-            '+.alibaba.com': '223.5.5.5',
-            '+.qq.com': '180.76.76.76',
-            '+.tencent.com': '180.76.76.76',
-            '+.weixin.com': '180.76.76.76',
-            '+.qpic.cn': '180.76.76.76',
-            '+.jd.com': '180.76.76.76',
-            '+.bilibili.com': '180.76.76.76',
-            '+.hdslb.com': '180.76.76.76',
-            '+.163.com': '180.76.76.76',
-            '+.126.com': '180.76.76.76',
-            '+.126.net': '180.76.76.76',
-            '+.127.net': '180.76.76.76',
-            '+.netease.com': '180.76.76.76',
-            '+.baidu.com': '223.5.5.5',
-            '+.bdstatic.com': '223.5.5.5',
-            '+.bilivideo.+': '180.76.76.76',
-            '+.iqiyi.com': '180.76.76.76',
-            '+.douyinvod.com': '180.184.1.1',
-            '+.douyin.com': '180.184.1.1',
-            '+.douyincdn.com': '180.184.1.1',
-            '+.douyinpic.com': '180.184.1.1',
-            '+.feishu.cn': '180.184.1.1'
-      },
-      "nameserver": [...domesticNameservers, ...foreignNameservers],
-      "fallback":  [
-          'https://101.101.101.101/dns-query', 
-          'https://208.67.220.220/dns-query', 
-          'https://doh.mullvad.net/dns-query'
+      "nameserver": [
+          "https://doh.pub/dns-query",
+          "https://dns.alidns.com/dns-query"
       ],
-      "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
-      "fallback-filter": { 
-          geoip: true, 
-          ipcidr: [
-              '240.0.0.0/4',
-              '0.0.0.0/32',
-              '223.75.236.241/32',
-              '182.43.124.6/32',
-              '106.74.25.198/32',
-              '183.192.65.101/32'
-          ], 
-          domain: [
-              '+.google.cn',
-              '+.tagss01.pro',
-              '+.tagss02.pro',
-              '+.tagss03.pro',
-              '+.tagss04.pro',
-              '+.tagss05.pro',
-              '+.tagcdnsub.work',
-              '+.jsdelivr.net',
-              '+.proton.me'
-          ]
-      }
+      "direct-nameserver": [
+          "https://doh.pub/dns-query",
+          "https://dns.alidns.com/dns-query"
+      ],
   };
 
+  config["find-process-mode"] = "strict";
+  config["global-client-fingerprint"] = "chrome";
+  config["host"] = hostConfig;
   config["dns"] = dnsConfig;
 }
 
@@ -386,24 +332,11 @@ const rules = [
   "RULE-SET,Tiktok,Amusement",
   "RULE-SET,Tiktok-c,Amusement",
   "RULE-SET,YouTube Music,Amusement",
-  "RULE-SET,Domestic,DIRECT",
-  // "RULE-SET,Domestic-ipcidr,DIRECT",
   "RULE-SET,LAN,DIRECT",
-  "RULE-SET,China-Websites,DIRECT",
   "RULE-SET,China-streaming,China",
   "RULE-SET,China-streaming-ipcidr,China",
+  "RULE-SET,China,DIRECT",
+  "RULE-SET,China-ipcidr,DIRECT",
   "RULE-SET,reject,Reject",
-  "GEOIP,CN,DIRECT",
   "MATCH,Final"
 ]
-
-
-function main(config) {
-
-  delOriginRuleAndProxys(config);
-  addProxyToGroup(config);
-  addRegionGroupsToCustomGroups(config);
-  config["rules"] = [...rules];
-  updateDNS(config);
-  return config;
-}
