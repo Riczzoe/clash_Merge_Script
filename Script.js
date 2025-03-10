@@ -4,6 +4,7 @@ function main(config) {
   addRegionGroupsToCustomGroups(config);
   config["rules"] = [...rules];
   updateDNS(config);
+  addUSRelay(config);
   return config;
 }
 
@@ -134,18 +135,18 @@ function delOriginRuleAndProxys(config) {
   proxyGroups.unshift(defaultProxyGroup);
 
   // 添加默认的Reject和Final策略组
-  proxyGroups.push(
-    {
-      name: 'Reject',
-      type: 'select',
-      proxies: ['REJECT', 'PROXY']
-    },
-    {
-      name: 'Final',
-      type: 'select',
-      proxies: ['PROXY', 'DIRECT']
-    }
-  );
+  // proxyGroups.push(
+  //   {
+  //     name: 'Reject',
+  //     type: 'select',
+  //     proxies: ['REJECT', 'PROXY']
+  //   },
+  //   {
+  //     name: 'Final',
+  //     type: 'select',
+  //     proxies: ['PROXY', 'DIRECT']
+  //   }
+  // );
 
   // 将新的策略组添加到原始对象中
   config['proxy-groups'] = proxyGroups;
@@ -251,7 +252,8 @@ function addRegionGroupsToCustomGroups(config) {
       return combineAndDeduplicate(specificNames.filter(name => baseProxy.includes(name)), defaultNames);
   };
 
-  const defaultGroup = ["PROXY", "Reject", "Final"];
+  // const defaultGroup = ["PROXY", "Reject", "Final"];
+  const defaultGroup = ["PROXY"];
   const baseGroup = groupNames;
 
   const baseProxy = config['proxy-groups']
@@ -278,7 +280,51 @@ function addRegionGroupsToCustomGroups(config) {
   return updatedRawObj;
 }
 
+function addUSRelay(config) {
+    const usResIp = {
+        name: "usRes",
+        type: "socks5",
+        server: "",
+        port: ,
+        username: "",
+        password: ""
+    }
+    const USRelay = {
+        name: "US-Relay",
+        type: "relay",
+        proxies: ["US", "usRes"]
+    }
+    const NeedInsertRelayGroup = ["SELECT", ...groupNames];
+
+    // 插入US住宅ip
+    config.proxies.push(usResIp);
+
+    // 插入US-Relay策略组到合适的位置, 这里默认选择在US后
+    const index = config["proxy-groups"].findIndex(group => group.name === "US");
+    if (index !== -1) {
+        config["proxy-groups"].splice(index + 1, 0, USRelay);
+    } else {
+        config["proxy-groups"].push(USRelay);
+    }
+
+    config["proxy-groups"].forEach(group => {
+        if (NeedInsertRelayGroup.includes(group.name)) {
+            if (Array.isArray(group.proxies)) {
+                // 如果 proxies 数组可能被多个组共享，这里先克隆一份，避免修改共享引用
+                group.proxies = [...group.proxies];
+                const usIndex = group.proxies.indexOf("US");
+                if (usIndex !== -1) {
+                    group.proxies.splice(usIndex + 1, 0, "US-Relay");
+                } else {
+                    group.proxies.push("US-Relay");
+                }
+            }
+        }
+    });
+}
+
 const rules = [
+  "IP-CIDR,118.190.20.162/8,DIRECT",
   // "IP-CIDR,34.92.28.5/32,DIRECT",
   "DOMAIN-SUFFIX,kagi.com,GAM",
   // "DOMAIN-SUFFIX,github.dev,DIRECT",
@@ -302,9 +348,9 @@ const rules = [
   "RULE-SET,Amusement-cla,Amusement",
   "RULE-SET,Telegram-ipcidr,Amusement",
   "RULE-SET,Telegram,Amusement",
-  "RULE-SET,Netflix,Amusement",
-  "RULE-SET,Netflix-ipcidr,Amusement",
-  "RULE-SET,Netflix-cla,Amusement",
+  "RULE-SET,Netflix,Netflix",
+  "RULE-SET,Netflix-ipcidr,Netflix",
+  "RULE-SET,Netflix-cla,Netflix",
   "RULE-SET,Steam,Amusement",
   "RULE-SET,Tiktok,Amusement",
   "RULE-SET,Tiktok-c,Amusement",
@@ -330,6 +376,6 @@ const rules = [
   "RULE-SET,China-ipcidr,China",
   "RULE-SET,China-cla,China",
   "RULE-SET,LAN,DIRECT",
-  "RULE-SET,reject,Reject",
-  "MATCH,Final"
+  "RULE-SET,reject,REJECT",
+  "MATCH,PROXY"
 ]
