@@ -52,29 +52,33 @@ function updateDNS(config) {
 }
 
 function delOriginRuleAndProxys(config) {
-  // Delete the original rules and proxies
-  config['proxy-groups'] = [];
-  config.rules = [];
+    // Delete the original rules and proxies
+    config['proxy-groups'] = [];
+    config.rules = [];
 
-  const selectGroup = { name: 'SELECT', type: 'select', proxies: [] };
+    const selectGroup = { name: 'SELECT', type: 'select', proxies: [] };
+    const finalGroup = { name: 'Final', type: 'select', 
+        proxies: [ "SELECT", "DIRECT" ] };
 
-  // Create a new proxy group based on groupNames 
-  config['proxy-groups'] = [
-    selectGroup,
-    ...groupNames.map(name => ({ name, type: 'select', proxies: [] }))
-  ];
 
-  return config;
+    // Create a new proxy group based on groupNames 
+    config['proxy-groups'] = [
+        selectGroup,
+        ...groupNames.map(name => ({ name, type: 'select', proxies: [] })),
+        finalGroup
+    ];
+
+    return config;
 }
 
-function assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, Netflix, StarPlusLogin, StarPlus }) {
+function assignProxyGroups(config, { Auto, MustProxy, DirectFirst, Select, ProxyFirst, baseProxy, AI, Netflix, StarPlusLogin, StarPlus }) {
     const mapping = {
         Amusement: MustProxy,
         GAM: MustProxy,
         China: DirectFirst,
         Download: ProxyFirst,
         Tech: ProxyFirst,
-        SELECT: baseProxy,
+        SELECT: Select,
         AI: AI,
         Netflix: Netflix,
         StarPlusLogin: StarPlusLogin,
@@ -144,7 +148,7 @@ function addRegionGroupsToCustomGroups(config) {
     const constructGroup = (specificNames, defaultNames) =>
         combineAndDeduplicate(specificNames.filter(name => baseProxy.includes(name)), defaultNames);
 
-    const defaultGroup = ["PROXY"];
+    const defaultGroup = ["PROXY", "Final"];
     const baseGroup = groupNames; // 假定 groupNames 是全局或外部变量
 
     // 从 proxy-groups 中提取有效的 baseProxy 名称
@@ -154,6 +158,7 @@ function addRegionGroupsToCustomGroups(config) {
         .filter(name => !baseGroup.includes(name) && !defaultGroup.includes(name) && name !== 'SELECT');
 
     const Auto = ["SELECT", ...constructGroup(["US"], baseProxy)];
+    const Select = constructGroup(["US"], baseProxy);
     const MustProxy = ["SELECT", ...baseProxy];
     const DirectFirst = ["DIRECT", ...MustProxy];
     const ProxyFirst = ["SELECT", "DIRECT", ...baseProxy];
@@ -162,7 +167,7 @@ function addRegionGroupsToCustomGroups(config) {
     const StarPlusLogin = constructGroup(["America"], MustProxy);
     const StarPlus = constructGroup(["US"], MustProxy);
 
-    return assignProxyGroups(config, { Auto, MustProxy, DirectFirst, ProxyFirst, baseProxy, AI, Netflix, StarPlusLogin, StarPlus });
+    return assignProxyGroups(config, { Auto, MustProxy, DirectFirst, Select, ProxyFirst, baseProxy, AI, Netflix, StarPlusLogin, StarPlus });
 }
 
 const rules = [
@@ -221,8 +226,7 @@ const rules = [
   "RULE-SET,China-cla,China",
   "RULE-SET,LAN,DIRECT",
   "RULE-SET,reject,REJECT",
-  // "MATCH,PROXY"
-  "MATCH,SELECT"
+  "MATCH,Final"
 ]
 
 const customGroups = [
