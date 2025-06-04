@@ -118,7 +118,7 @@ function addProxyToGroup(config) {
     });
 
     config.proxies.forEach(proxy => {
-        if (proxy.name.includes('[Premium]')) {
+        if (proxy.name.includes('Premium')) {
             return;   
         }
 
