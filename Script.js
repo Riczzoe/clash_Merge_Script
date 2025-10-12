@@ -11,10 +11,7 @@ const groupNames = [
     "AI",
     "Amusement",
     "China",
-    "Download",
     "GAM",
-    "Netflix",
-    "Tech"
 ]
 
 function updateDNS(config) {
@@ -26,23 +23,45 @@ function updateDNS(config) {
     const dnsConfig = {
         "enable": true,
         "ipv6": false,
-        "listen": "0.0.0.0:53",
-        "use-hosts": true,
+        "listen": "0.0.0.0:1053",
+        "prefer-h3": true,
+        "respect-rules": true,
+        "cache-algorithm": "arc",
+        "cache-size": "2048",
+        "use-hosts": false,
+        "use-system-hosts": false,
         "enhanced-mode": "fake-ip",
         "fake-ip-range": "198.18.0.1/16",
         "fake-ip-filter": [
             "rule-set:Fakeip-filter",
             "rule-set:Private",
-            "rule-set:China"
+            "rule-set:China",
+            "geosite:connectivity-check",
+            "geosite:private",
+        ],
+        "default-nameserver": [
+            "119.29.29.29",
+            "223.5.5.5",
+            "223.6.6.6"
+        ],
+        "proxy-server-nameserver": [
+            "tls://dot.pub:853",
+            "tls://dns.alidns.com:853"
         ],
         "nameserver": [
-            "https://doh.pub/dns-query",
-            "https://dns.alidns.com/dns-query"
+            "tls://dot.pub:853",
+            "tls://dns.alidns.com:853"
         ],
-        "direct-nameserver": [
-            "https://doh.pub/dns-query",
-            "https://dns.alidns.com/dns-query"
-        ],
+        "nameserver-policy": {
+            "geosite:google,youtube": [
+                "tls://dns.google:853",
+                "tls://cloudflare-dns.com:853"
+            ],
+            "geosite:cn,private": [
+                "tls://dns.alidns.com:853",
+                "tls://dot.pub:853",
+            ]
+        }
     };
 
     config["find-process-mode"] = "strict";
@@ -170,65 +189,6 @@ function addRegionGroupsToCustomGroups(config) {
     return assignProxyGroups(config, { Auto, MustProxy, DirectFirst, Select, ProxyFirst, baseProxy, AI, Netflix, StarPlusLogin, StarPlus });
 }
 
-const rules = [
-    "IP-CIDR,118.190.20.162/8,DIRECT",
-    // "IP-CIDR,34.92.28.5/32,DIRECT",
-    "DOMAIN-SUFFIX,kagi.com,GAM",
-    // "DOMAIN-SUFFIX,github.dev,DIRECT",
-    "DOMAIN-SUFFIX,wqatom.lol,DIRECT",
-    "IP-CIDR,127.0.0.1/8,DIRECT",
-    "DOMAIN-KEYWORD,shanbay,DIRECT",
-    "DOMAIN-KEYWORD,zhihuishu.com,DIRECT",
-    "DOMAIN-KEYWORD,weread.qq.com,DIRECT",
-    "DOMAIN-KEYWORD,chaoxing.com,DIRECT",
-    "DOMAIN-KEYWORD,xuetangx.com,DIRECT",
-    "DOMAIN-KEYWORD,icourse163.org,DIRECT",
-    "DOMAIN-KEYWORD,unipus.cn,DIRECT",
-    "DOMAIN-KEYWORD,deepl.com,Tech",
-    "DOMAIN-KEYWORD,lingvanex,Tech",
-    "DOMAIN-KEYWORD,leetcode.com,Tech",
-    "DOMAIN-KEYWORD,leetcode.cn,DIRECT",
-    "RULE-SET,AI,AI",
-    "RULE-SET,Gemini-c,AI",
-    "RULE-SET,Netflix,Netflix",
-    "RULE-SET,Netflix-ipcidr,Netflix",
-    "RULE-SET,Netflix-cla,Netflix",
-    "RULE-SET,Packages,Download",
-    "RULE-SET,Steam-download,Download",
-    "RULE-SET,Download,Download",
-    "RULE-SET,Speedtest,Download",
-    "RULE-SET,Amusement,Amusement",
-    "RULE-SET,Amusement-ipcidr,Amusement",
-    "RULE-SET,Amusement-cla,Amusement",
-    "RULE-SET,Telegram-ipcidr,Amusement",
-    "RULE-SET,Telegram,Amusement",
-    "RULE-SET,Steam,Amusement",
-    "RULE-SET,Tiktok,Amusement",
-    "RULE-SET,Tiktok-c,Amusement",
-    "RULE-SET,Apple-domain,GAM",
-    "RULE-SET,Apple-ipcidr,GAM",
-    "RULE-SET,Google,GAM",
-    "RULE-SET,Google-ipcidr,GAM",
-    "RULE-SET,Microsoft,GAM",
-    "RULE-SET,PayPal,GAM",
-    "RULE-SET,Amazon,GAM",
-    "RULE-SET,Coursera,Tech",
-    "RULE-SET,Tech,Tech",
-    "RULE-SET,Github,Tech",
-    // DIRECT or China
-    "RULE-SET,Arch-mirrors,DIRECT",
-    "RULE-SET,Bilibili,China",
-    "RULE-SET,Bilibili-ipcidr,China",
-    "RULE-SET,Bilibili-cla,China",
-    "RULE-SET,Scholar,Tech",
-    "RULE-SET,China,China",
-    "RULE-SET,China-ipcidr,China",
-    "RULE-SET,China-cla,China",
-    "RULE-SET,LAN,DIRECT",
-    "RULE-SET,reject,REJECT",
-    "MATCH,Final"
-]
-
 const customGroups = [
     // {
     //   "name": "HK",
@@ -281,3 +241,45 @@ const customGroups = [
     // }
 ]
 
+const rules = [
+    "DOMAIN-SUFFIX,hnu.edu.cn, DIRECT",
+    "DOMAIN-SUFFIX,kagi.com,GAM",
+    "IP-CIDR,127.0.0.1/8,DIRECT",
+    "IP-CIDR,35.212.211.191/32,DIRECT",
+    "DOMAIN-KEYWORD,shanbay,DIRECT",
+    "DOMAIN-KEYWORD,zhihuishu.com,DIRECT",
+    "DOMAIN-KEYWORD,weread.qq.com,DIRECT",
+    "DOMAIN-KEYWORD,chaoxing.com,DIRECT",
+    "DOMAIN-KEYWORD,xuetangx.com,DIRECT",
+    "DOMAIN-KEYWORD,icourse163.org,DIRECT",
+    "DOMAIN-KEYWORD,unipus.cn,DIRECT",
+    "DOMAIN-KEYWORD,deepl.com,GAM",
+    "DOMAIN-KEYWORD,lingvanex,GAM",
+    "DOMAIN-KEYWORD,leetcode.com,GAM",
+    "DOMAIN-KEYWORD,leetcode.cn,DIRECT",
+    "RULE-SET,AI,AI",
+    "RULE-SET,AI-c,AI",
+    "RULE-SET,Amusement,Amusement",
+    "RULE-SET,Amusement-ip,Amusement",
+    "RULE-SET,Amusement-cla,Amusement",
+    "RULE-SET,Telegram-ip,Amusement",
+    "RULE-SET,Telegram,Amusement",
+    "RULE-SET,Download,Amusement",
+    "RULE-SET,GAM,GAM",
+    "RULE-SET,GAM-ip,GAM",
+    "RULE-SET,GAM-cla,GAM",
+    "RULE-SET,Web,GAM",
+    "RULE-SET,Web-cla,GAM",
+    "RULE-SET,Web-ip,GAM",
+    // DIRECT or China
+    "RULE-SET,Mirrors,DIRECT",
+    "RULE-SET,Bilibili,China",
+    "RULE-SET,Bilibili-ip,China",
+    "RULE-SET,Bilibili-cla,China",
+    "RULE-SET,China,China",
+    "RULE-SET,China-ip,China",
+    "RULE-SET,China-cla,China",
+    "RULE-SET,LAN,DIRECT",
+    "RULE-SET,reject,REJECT",
+    "MATCH,Final"
+]

@@ -2,82 +2,62 @@ rule-providers:
   AI:
     type: http
     behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/AI/AI.yaml
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/AI.yaml
     interval: 86400
-  Apple-domain:
+  AI-c:
     type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Apple-domain.yaml
-    interval: 86400
-  Apple-ipcidr:
-    behavior: ipcidr
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Apple-ipcidr.yaml
-    type: http
-    interval: 86400
-  Amazon:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Amazon.yaml
-    type: http
+    behavior: classical
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/AI-c.yaml
     interval: 86400
   Amusement:
     behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/Amusement.yaml
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/Amusement.yaml
     type: http
     interval: 86400
-  Amusement-ipcidr:
+  Amusement-ip:
     behavior: ipcidr
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/Amusement-ipcidr.yaml
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/Amusement-ip.yaml
     type: http
     interval: 86400
   Amusement-cla:
     behavior: classical
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/Amusement-cla.yaml
-    type: http
-    interval: 86400
-  Arch-mirrors:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Download/Arch-mirrors.yaml
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/Amusement-cla.yaml
     type: http
     interval: 86400
   Bilibili:
     behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Bilibili.yaml
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/Bilibili.yaml
     type: http
     interval: 86400
-  Bilibili-ipcidr:
+  Bilibili-ip:
     behavior: ipcidr
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Bilibili-ipcidr.yaml
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/Bilibili-ip.yaml
     type: http
     interval: 86400
   Bilibili-cla:
     behavior: classical
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/Media/Bilibili-cla.yaml
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/Bilibili-cla.yaml
     type: http
     interval: 86400
   China:
     type: http
     behavior: domain
-    url: "https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/China/China.yaml"
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/China.yaml
     interval: 86400
-  China-ipcidr:
+  China-ip:
     type: http
     behavior: ipcidr
-    url: "https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/China/China-ipcidr.yaml"
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/China-ip.yaml
     interval: 86400
   China-cla:
     behavior: classical
-    url: "https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/China/China-cla.yaml"
-    type: http
-    interval: 86400
-  Coursera:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Learning/Coursera.yaml
+    url: https://raw.githubusercontent.com/Riczzoe/Rule-Set/refs/heads/main/China-cla.yaml
     type: http
     interval: 86400
   Download:
     behavior: domain
     type: http
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/Download/Download.yaml
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/Download.yaml
     interval: 86400
   Fakeip-filter:
     type: http
@@ -85,49 +65,24 @@ rule-providers:
     format: mrs
     url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/fakeip-filter-lite.mrs"
     interval: 86400
-  Gemini-c:
-    behavior: classical
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/AI/Gemini-c.yaml
-    type: http
-    interval: 86400
-  Github:
+  GAM:
     behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Daily/Github.yaml
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/GAM.yaml
     type: http
     interval: 86400
-  Google:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Google.yaml
-    type: http
-    interval: 86400
-  Google-ipcidr:
+  GAM-ip:
     behavior: ipcidr
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Google-ipcidr.yaml
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/GAM-ip.yaml
     type: http
     interval: 86400
-  Microsoft:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Microsoft.yaml
-    type: http
-    interval: 86400
-  Netflix:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Netflix.yaml
-    type: http
-    interval: 86400
-  Netflix-ipcidr:
-    behavior: ipcidr
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Netflix-ipcidr.yaml
-    type: http
-    interval: 86400
-  Netflix-cla:
+  GAM-cla:
     behavior: classical
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Netflix-cla.yaml
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/GAM-cla.yaml
     type: http
     interval: 86400
-  PayPal:
+  Mirrors:
     behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/PayPal.yaml
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/Mirrors.yaml
     type: http
     interval: 86400
   Private:
@@ -136,54 +91,14 @@ rule-providers:
     format: mrs
     url: "https://github.com/DustinWin/ruleset_geodata/releases/download/mihomo-ruleset/private.mrs"
     interval: 86400
-  Scholar:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Learning/Scholar.yaml
-    type: http
-    interval: 86400
-  Speedtest:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Speedtest.yaml
-    type: http
-    interval: 86400
-  Steam:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Steam.yaml
-    type: http
-    interval: 86400
-  Steam-download:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Download/Steam-download.yaml
-    type: http
-    interval: 86400
-  Packages:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Download/packages.yaml
-    type: http
-    interval: 86400
-  Tech:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Daily/Tech.yaml
-    type: http
-    interval: 86400
-  Telegram-ipcidr:
+  Telegram-ip:
     behavior: ipcidr
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Telegram-ipcidr.yaml
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/Telegram-ip.yaml
     type: http
     interval: 86400
   Telegram:
     behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Telegram.yaml
-    type: http
-    interval: 86400
-  Tiktok:
-    behavior: domain
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/main/Provider/Media/Tiktok.yaml
-    type: http
-    interval: 86400
-  Tiktok-c:
-    behavior: classical
-    url: https://raw.githubusercontent.com/Riczzoe/Clash-Rule-Set/refs/heads/main/Provider/Media/Tiktok-c.yaml
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/Telegram.yaml
     type: http
     interval: 86400
   LAN:
@@ -194,5 +109,20 @@ rule-providers:
   reject:
     behavior: domain
     url: https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
+    type: http
+    interval: 86400
+  Web:
+    behavior: domain
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/Web.yaml
+    type: http
+    interval: 86400
+  Web-cla:
+    behavior: classical
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/Web-cla.yaml
+    type: http
+    interval: 86400
+  Web-ip:
+    behavior: ipcidr
+    url: https://github.com/Riczzoe/Rule-Set/raw/refs/heads/main/Web-ip.yaml
     type: http
     interval: 86400
